@@ -1,0 +1,58 @@
+/* .p-tabMenu
+    text-align: right !important
+    padding-right: 1% */
+
+.navigation-bar
+    padding-left: 0%,
+
+
+/* height fix to percentage due to content height */
+.side-bar
+    padding-top: 0.3%
+    padding-left: 0.5%
+
+.side-bar-circles 
+    background-color: pink,
+    width: 20%
+    height: 100%          
+    float: left
+    &:hover      
+        background-color: transparentize(rgba(255,23 ,11 ,0.5 ),0.1 )
+
+@mixin box-shadow($x-axis: 0, $y-axis: 10px, $blur: 2px, $color: #f8ff00) 
+  box-shadow: $x-axis $y-axis $blur $color
+
+
+.circles
+    height: 25% !important,
+    width: 75% !important,
+    background-color: #bbb,
+    border-radius: 50%,
+    display: inline-block,
+    @include box-shadow (10px 0 0 -2px #f8ff00)
+        
+    
+
+/* .circle1
+    height: 15%,
+    width: 25%,
+    background-color: #a33d3d,
+    border-radius: 50%,
+    display: inline-block,
+    padding-top: -100% */
+
+.happy-birthday 
+    font-family: cursive
+    font-size: 180%
+    align-content: center
+    color: #585551
+    padding-top: 20%
+    margin-left: 2%
+
+.sidebar-bottom-sign
+    max-height: 300px
+    padding-top: 100%
+    margin-top: 105%
+    padding-bottom: 3%
+    text-align: center
+
