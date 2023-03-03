@@ -1,0 +1,34 @@
+{
+    "data": 
+    [
+        {
+            "data": "Documents Folder",
+            "children": [{
+                    "data": "Work Folder",
+                    "children": [{"data": "Expenses Document"}, {"data": "Resume Document"}]
+                },
+                {
+                    "data": "Home Folder",
+                    "children": [{"data": "Invoices for this month"}]
+                }]
+        },
+        {
+            "data": "Pictures Folder",
+            "children": [
+                {"data": "Barcelona Photo"},
+                {"data": "PrimeFaces Logo"},
+                {"data": "PrimeUI Logo"}]
+        },
+        {
+            "data": "Movies Folder",
+            "children": [{
+                    "data": "Pacino Movies",
+                    "children": [{"data": "Scarface Movie"}, {"data": "Serpico Movie"}]
+                },
+                {
+                    "data": "De Niro Movies",
+                    "children": [{"data": "Goodfellas Movie"}, {"data": "Untouchables Movie"}]
+                }]
+        }
+    ]
+  }
