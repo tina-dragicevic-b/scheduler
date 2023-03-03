@@ -1,0 +1,49 @@
+<!-- <p-editor [(ngModel)]="diary" [style]="{'height':'320px'}">
+    <ng-template pTemplate="header">
+        <span class="ql-format-group">
+            <span title="Bold" class="ql-format-button ql-bold"></span>
+            <span class="ql-format-separator"></span>
+            <span title="Italic" class="ql-format-button ql-italic"></span>
+            <span class="ql-format-separator"></span>
+            <span title="Underline" class="ql-format-button ql-underline"></span>
+            <span class="ql-format-separator"></span>
+            <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+        </span>
+    </ng-template>
+</p-editor> -->
+<!-- [style]="{ 'height': '380px'}" -->
+<div class="mainer">
+  <div class="main" [style.background]="setBackground()">
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+      <div style="padding-top: 20px; padding-left: 5px; padding-right: 5px">
+        <div style="padding-top: 20px; padding-left: 40px; padding-right: 30px">
+          <p-editor
+            [style]="{ height: '500px', '': '' }"
+            [(ngModel)]="diary.text"
+            name="text"
+          ></p-editor>
+          <br />
+          <!-- <button type="submit" class="btn-btn-info">Submit</button>
+          <button type="button" class="btn-btn-info">Back</button>  -->
+          <button style="float: left; margin-left: 1%;" pButton type="button" class="p-button-raised p-button-secondary" icon="pi pi-arrow-left" (click)="back()"></button>
+          <button style="float: left; margin-left: 10px;" pButton type="submit" class="p-button-raised p-button-help" >Submit</button>
+          <br />
+          <br />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--   <p-editor [(ngModel)]="diary.text" [style]="{'height':'320px'}">
+    <ng-template pTemplate="header">
+        <span class="ql-formats">
+            <button type="button" class="ql-font" aria-label="Font"></button>
+            <button type="button" class="ql-size" aria-label="Size"></button>
+            <button type="button" class="ql-color" aria-label="Color"></button>
+            <button type="button" class="ql-bold" aria-label="Bold"></button>
+            <button type="button" class="ql-italic" aria-label="Italic"></button>
+            <button type="button" class="ql-underline" aria-label="Underline"></button>
+        </span>
+    </ng-template>
+</p-editor>
+ -->

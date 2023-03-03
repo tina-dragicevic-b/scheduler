@@ -1,0 +1,26 @@
+<!-- <app-navbar></app-navbar> -->
+
+<div *ngIf="token1 !== 'null'; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><app-navbar [receivedValue]="token1"></app-navbar></ng-template>
+<ng-template #elseBlock><app-navbar [receivedValue]="token2"></app-navbar></ng-template>
+<div class="theme" style="margin-top: 18px;">
+    <app-logout></app-logout>
+
+    <button pButton style="margin-left: 20px;" type="button" class="p-button-warning" (click)="changeTheme('light')" label="Light" ></button>
+    <button pButton type="button" class="p-button-secondary" (click)="changeTheme('dark')" label="Dark" ></button>
+</div> 
+<!-- <app-event></app-event> -->
+<div *ngIf="token1 !== 'null'; then thenBlock2 else elseBlock2"></div>
+<ng-template #thenBlock2><app-event [receivedValue]="token1"></app-event></ng-template>
+<ng-template #elseBlock2><app-event [receivedValue]="token2"></app-event></ng-template>
+<!-- <button pButton type="button" class="p-button-warning" (click)="changeTheme('light')" label="Light" ></button>
+<button pButton type="button" class="p-button-secondary" (click)="changeTheme('dark')" label="Dark" ></button> -->
+<!-- <div *ngIf="token1 !== 'null'; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><app-navbar [receivedValue]="token1"></app-navbar></ng-template>
+<ng-template #thenBlock><app-logout></app-logout></ng-template>
+<ng-template #thenBlock><app-event [receivedValue]="token1"></app-event></ng-template> -->
+<!--  -->
+<!-- <ng-template #elseBlock><app-event [receivedValue]="token2"></app-event></ng-template>
+<ng-template #elseBlock><app-logout></app-logout></ng-template>
+<ng-template #elseBlock><app-navbar [receivedValue]="token2"></app-navbar></ng-template>
+ -->

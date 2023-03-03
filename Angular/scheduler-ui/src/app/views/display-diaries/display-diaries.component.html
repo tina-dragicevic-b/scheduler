@@ -1,0 +1,34 @@
+<app-diary-header (goBack)="back()" (newDiary)="addNewDiary()"></app-diary-header>
+<br>
+
+<div class="frame">
+  <div class="blur">
+<div class="pageBody" *ngIf="diaries.length !== 0;else noDiaries">
+<p-accordion *ngFor="let diary of diaries">
+  <p-accordionTab header="{{ diary.dateGeneratedFormat }}">
+    <p [innerHtml]="sanitize(diary.text)"></p>
+    <!-- <button pButton type="button" icon="pi pi-check" iconPos="left"></button>
+    <button pButton type="button" icon="pi pi-check" iconPos="left"></button> -->
+    <!-- <span class="p-buttonset"></span> -->
+    <hr>
+    <!-- <p class="dateTime">Generated on {{diary.dateGeneratedFormat}} at {{diary.timeGeneratedFormat}} {{diary.dateModifiedFormat}}</p> -->
+    <!-- GENERATED -->
+    <div *ngIf="diary.dateTimeModified; else elseBlock">
+      <p class="dateTime">Generated on {{diary.dateGeneratedFormat}} at {{diary.timeGeneratedFormat}} | Modified on: {{diary.dateModifiedFormat}} at {{diary.timeModifiedFormat}}</p>
+    </div>
+    <ng-template #elseBlock> <p class="dateTime">Generated on {{diary.dateGeneratedFormat}} at {{diary.timeGeneratedFormat}}</p></ng-template>
+    <!--  END GENERATED-->
+    <button pButton type="button" class="p-button-raised p-button-help" icon="pi pi-pencil"  routerLink="/my-diary/{{diary.id}}" [queryParams]="{token: token}"></button>
+
+
+    <p-confirmPopup></p-confirmPopup>
+    <button (click)="onDeleteToggle($event, diary)" style="margin-left: 10px;" pButton type="button" class="p-button-raised p-button-danger" icon="pi pi-trash"></button>
+  </p-accordionTab>
+</p-accordion>
+</div>
+</div>
+</div>
+<ng-template #noDiaries>
+  <!-- <p style="color: #fff; text-align: center; font-size: 2em;">📃 ✏ You haven't written any diaryes yet. 📑 </p> -->
+  <p style="color: rgb(255, 121, 31); text-align: center; font-size: 2em;">📃 ✏ You haven't written any diaryes yet. 📑 </p>
+</ng-template>

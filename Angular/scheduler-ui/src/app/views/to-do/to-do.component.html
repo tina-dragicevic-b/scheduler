@@ -1,0 +1,23 @@
+<app-diary-header (goBack)="back()" (newDiary)="addNewToDoList()"></app-diary-header>
+
+<p *ngIf="!todos || todos.length === 0" style="color: #fff; text-align: center; font-size: 2em;">📜  ✏ You don't have any todo lists yet. 💭 </p>
+
+<p-paginator [rows]="5" [totalRecords]="todos.length"  (onPageChange)="paginate($event)"></p-paginator>
+
+<div class="main">
+    <div class="td" *ngFor="let list of pagedTodos" routerLink="/todo-form/{{list.id}}" [queryParams]="{token: token}">
+        <div style="height: 50px; background-color: #031331">
+        <h3 style="padding-top: 5%; font-size: 1rem; color: rgb(255, 181, 44); justify-content: center; display: flex;">{{list.name}}</h3>
+        </div>
+        <div class="list">
+            <br>
+        <ul style="list-style: none;" *ngFor="let item of list.items | keyvalue">
+            <li *ngIf="item.value === true;else crossValue">{{item.key}}</li>
+            <ng-template #crossValue>
+                <li class="cross" style="text-decoration: line-through; color:rgb(255, 181, 44)">{{item.key}}</li>
+            </ng-template>
+        </ul>
+        <br>
+        </div>
+    </div>
+</div>

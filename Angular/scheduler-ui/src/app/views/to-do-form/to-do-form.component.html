@@ -1,0 +1,66 @@
+<div class="todo">
+    <button style="margin-right: 10px;  float: right;" pButton pRipple type="button" label="Delete list " icon="pi pi-trash" (click)="onDeleteList($event)" class="p-button-rounded p-button-warning"></button>
+    <p-confirmPopup></p-confirmPopup>
+    <div *ngIf="!inputNameField;else nameField">
+        <span class="search">
+            <h1 *ngIf="todo.name;else listDefaultName">{{todo.name}} 
+            <button pButton pRipple type="button" label="Change name " icon="pi pi-heart" (click)="onInputNameField()" class="p-button-rounded p-button-info"></button>
+            </h1>
+        </span>
+        <div style="margin-top: 10px;" class="search">
+            <span class="p-float-label">
+                <input [(ngModel)]="item" id="float-input" type="text" pInputText> 
+                <label for="float-input">Add Todo</label>
+                <button style="margin-left: -35px; width: 55px; height: 49px;" (click)="click()" pButton pRipple type="button" icon="pi pi-plus" class="p-button-lg p-button-rounded p-button-warning"></button>
+            </span>
+        </div>
+        <ul class="ul">
+            <li class="li" *ngFor="let i of todo.items | keyvalue">
+                <div *ngIf="i.value === true;else crossValue">
+                    {{i.key}}
+                    <button style="margin-right: 10px; float: right;" (click)="delete(i)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+                    <button style="margin-right: 10px; float: right;" (click)="check(i)" pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-info"></button>
+
+                </div>
+                <ng-template #crossValue>
+                    <div class="cross" style="text-decoration: line-through;">
+                        {{i.key}}
+                        <button style="margin-right: 10px; float: right;" (click)="delete(i)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+                        <!-- <button style="margin-right: 10px; float: right;" (click)="check(i)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"></button> -->
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+        <p class="search">{{errortext}}</p>
+        <ng-template #listDefaultName>
+            <span>
+                <h1>To Do
+                    <button pButton pRipple type="button" label="Change name " icon="pi pi-heart" (click)="onInputNameField()" class="p-button-rounded p-button-info"></button>
+                    <!-- <button pButton pRipple type="button" label="Change name " icon="pi pi-heart" (click)="onInputNameField()" class="p-button-rounded p-button-info"></button> -->
+                </h1>
+            </span>
+        </ng-template>
+    </div>
+
+    <ng-template #nameField>
+        <!-- <span>
+        <input [(ngModel)]="name" id="float-input" type="text" pInputText> 
+        <label for="float-input">Enter new list name</label>
+        <button style="margin-left: 10px;" pButton pRipple type="button" icon="pi pi-check" (click)="changeName(name)" class="p-button-rounded p-button-help"></button>
+        </span> -->
+        <div class="search" style="margin-bottom: 20px;">
+            <span class="p-float-label">
+                <input [(ngModel)]="name" id="float-input" type="text" pInputText> 
+                <label for="float-input">Enter new list name</label>
+                <button style="margin-left: 10px;" pButton pRipple type="button" icon="pi pi-check" (click)="changeName(name)" class="p-button-rounded p-button-help"></button>
+            </span>
+            <p class="search">{{errortext}}</p>
+        </div>
+    </ng-template>
+    <div *ngIf="todo.items.size === 0; else button">
+        <button disabled style="font-family: 'Brush Script MT', cursive;" class="btn btn-warning btn-block">Submit</button>
+    </div>
+    <ng-template #button>
+        <button (click)="onSubmit()" style="font-family: 'Brush Script MT', cursive;" class="btn btn-warning btn-block">Submit</button>
+    </ng-template>
+</div>

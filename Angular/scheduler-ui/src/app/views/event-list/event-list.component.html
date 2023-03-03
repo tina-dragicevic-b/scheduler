@@ -1,0 +1,190 @@
+<div *ngIf="token1 !== 'null'; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock
+  ><app-navbar [receivedValue]="token1"></app-navbar
+></ng-template>
+<ng-template #elseBlock
+  ><app-navbar [receivedValue]="token2"></app-navbar
+></ng-template>
+<!-- <app-logout></app-logout> -->
+  <!-- <p-paginator [first]="first" [rows]="1" [totalRecords]="eventsByGroup.length" (onPageChange)="onPageChange($event)" [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator> -->
+  <!-- <p-paginator [rows]="3" [totalRecords]="eventsByGroup.length" (onPageChange)="paginate($event)" [showPageLinks]="true"></p-paginator> -->
+
+  <!-- <p-table 
+  #dt
+  [value]="eventsByGroup"
+  [rows]="3"
+  [paginator]="true"></p-table> -->
+  <div>
+  <p-accordion *ngFor="let group of eventsByGroup">
+    
+    <div>
+      <hr
+        style="height: 2px"
+        [ngStyle]="{ 'background-color': group.group.color }"
+      />
+      <p-accordionTab header="{{ group.groupName }}">
+        <!-- GENERATED -->
+        <div *ngIf="group.eventList.length > 0; else elseBlockMessage">
+          <p-table
+            #dt
+            [value]="group.eventList"
+            [rows]="3"
+            [paginator]="true"
+            [globalFilterFields]="[
+              'name',
+              'selectedEvent.fromDate',
+            ]"
+            responsiveLayout="scroll"
+            [(selection)]="selectedEvents"
+            [rowHover]="true"
+            dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+          >
+            <ng-template pTemplate="caption">
+              <div class="flex align-items-center justify-content-between">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input
+                    pInputText
+                    type="text"
+                    name="search"
+                    (input)="dt.filterGlobal(fun($event), 'contains')"
+                    placeholder="Search by name..."
+                  />
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th></th>
+                <th pSortableColumn="name">
+                  Name<p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th >
+                  Start date
+                </th>
+                <th >
+                  End date
+                </th>
+                <th>
+                  Start hour
+                </th>
+                <th >
+                  End hour
+                </th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-selectedEvent>
+              <tr
+                *ngIf="
+                  selectedEvent.selectedRepetition[0] !== 'Monthly' &&
+                    selectedEvent.selectedRepetition[0] !== 'Yearly';
+                  else elseEndDateShow
+                "
+              >
+                <th></th>
+                <td>{{ selectedEvent.name }}</td>
+                <td>{{ selectedEvent.fromDate }}</td>
+                <td>{{ selectedEvent.toDate }}</td>
+                <td>{{ selectedEvent.startTime }}</td>
+                <td>{{ selectedEvent.endTime }}</td>
+                <td>{{ selectedEvent.description }}</td>
+                <!-- <td>{{ selectedEvent.startTime }}</td> -->
+                <!-- <td>{{ selectedEvent.endTime }}</td> -->
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-success mr-2"
+                    routerLink="/event/{{ selectedEvent.id }}"
+                    [queryParams]="{ token: token }"
+                  ></button>
+                  <p-confirmPopup></p-confirmPopup>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    (click)="deleteEvent($event, selectedEvent)"
+                    class="p-button-rounded p-button-warning"
+                  ></button>
+                </td>
+              </tr>
+
+              <ng-template #elseEndDateShow>
+                <tr>
+                  <th></th>
+                  <td>{{ selectedEvent.name }}</td>
+                  <td>{{ selectedEvent.fromDate }}</td>
+                  <td></td>
+                  <td>{{ selectedEvent.startTime }}</td>
+                  <td>{{ selectedEvent.endTime }}</td>
+                  <td>{{ selectedEvent.description }}</td>
+                  <td>
+                    <button
+                      pButton
+                      pRipple
+                      icon="pi pi-pencil"
+                      class="p-button-rounded p-button-success mr-2"
+                      routerLink="/event/{{ selectedEvent.id }}"
+                      [queryParams]="{ token: token }"
+                    ></button>
+                    <p-confirmPopup></p-confirmPopup>
+                    <button
+                      pButton
+                      pRipple
+                      icon="pi pi-trash"
+                      (click)="deleteEvent($event, selectedEvent)"
+                      class="p-button-rounded p-button-warning"
+                    ></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ group.eventList ? group.eventList.length : 0 }} events.
+              </div>
+            </ng-template>
+          </p-table>
+        </div>
+
+        <!-- </div> -->
+        <!--  -->
+        <!--  -->
+        <ng-template #elseBlockMessage>
+          <div
+            *ngIf="
+              group.groupName != 'Ungrouped events' &&
+                group.groupName != 'Free Time' && group.groupName != 'Gym' ;
+              else elseDisableBlock
+            "
+          >
+            <p style="color: #9c9c9c">No records in this group!</p>
+            <p-confirmPopup></p-confirmPopup>
+            <button
+              style="padding-left: 20px"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              (click)="deleteUnusedGroup($event, group.group)"
+              class="p-button-sm p-button-rounded p-button-danger p-button-text"
+            ></button>
+            <!-- <p style="color: #9c9c9c"> Delete this group! </p> -->
+          </div>
+        </ng-template>
+
+        <ng-template #elseDisableBlock>
+          <p style="color: #9c9c9c">No records in this group!</p>
+        </ng-template>
+        <!--  END GENERATED-->
+        <hr />
+      </p-accordionTab>
+    </div>
+  </p-accordion>
+</div>

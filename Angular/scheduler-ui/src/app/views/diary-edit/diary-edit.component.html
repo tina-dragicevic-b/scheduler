@@ -1,0 +1,35 @@
+<div id="app-theme" class="mainer">
+  <div class="main">
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+      <div style="padding-top: 20px; padding-left: 5px; padding-right: 5px">
+        <div style="padding-top: 20px; padding-left: 40px; padding-right: 30px">
+          <p-editor
+            [style]="{ height: '500px', '': '' }"
+            [(ngModel)]="diary.text"
+            name="text"
+          ></p-editor>
+          <br />
+          <!-- <button type="submit" class="btn-btn-info">Submit</button>
+            <button type="button" class="btn-btn-info">Back</button>  -->
+          <button
+            style="float: left; margin-left: 1%"
+            pButton
+            type="button"
+            (click)="back()"
+            class="p-button-raised p-button-secondary"
+            icon="pi pi-arrow-left"
+          ></button>
+          <button
+            style="float: left; margin-left: 10px"
+            pButton
+            type="submit"
+            class="p-button-raised p-button-success"
+            icon="pi pi-check"
+          ></button>
+          <br />
+          <br />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

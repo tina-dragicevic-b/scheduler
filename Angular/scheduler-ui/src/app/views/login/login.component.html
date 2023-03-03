@@ -1,0 +1,44 @@
+<div class="col-md-12">
+    <div class="card card-container"  style="border: 1px solid #fdfffe; padding-top: 1%;">
+        <!-- <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" /> -->
+        <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label class="label" for="username">Email</label> <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">Username is required!</div>
+            </div>
+            <div class="form-group">
+                <label class="label" for="password">Password</label> <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+                    #password="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                    <div *ngIf="password.errors" required>Input correct password!</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button style="font-family: 'Brush Script MT', cursive;" class="btn btn-warning btn-block">Login</button>
+            </div>
+            <!-- <div class="form-group">
+                <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Login failed: {{ errorMessage }}</div>
+            </div> -->
+            <div class="form-group">
+                <!-- <p style="font-family: 'Brush Script MT', cursive;" class="content-divider center mt-3">
+                    <span>or</span>
+                </p> -->
+                <br>
+                <br>
+                <p style="font-family: 'Brush Script MT', cursive;" class="social-login text-center">
+                    or Sign in with:
+                    <a href="{{ googleURL }}" class="ml-2">
+                        <img alt="Login with Google" src="assets/Google-Logo-PNG-File.png" width="110" height="70" class="btn-img-google">
+                    </a>
+                    <!-- <a href="{{ githubURL }}">
+                        <img alt="Login with Github" src="assets/GitHub.png" width="110" height="70" class="btn-img-github">
+                    </a> -->
+                </p>
+            </div>
+            <div class="alert alert-warning" *ngIf="f.submitted && isLoginFailed">
+                Email or password is incorrect! If you don't have an account, please register <a href="/register">here</a>.
+              </div>
+        </form>
+        <!-- <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div> -->
+    </div>
+</div>

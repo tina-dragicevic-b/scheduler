@@ -1,0 +1,211 @@
+<div *ngIf="token1 !== 'null'; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock
+  ><app-navbar [receivedValue]="token1"></app-navbar
+></ng-template>
+<ng-template #elseBlock
+  ><app-navbar [receivedValue]="token2"></app-navbar
+></ng-template>
+<div style="height: 5px"></div>
+<div>
+  <header class="pageHeader">
+    <br />
+    <button
+      style="float: left; margin-left: 1%"
+      pButton
+      type="button"
+      class="p-button-raised p-button-secondary"
+      icon="pi pi-arrow-left"
+      (click)="back()"
+    ></button>
+    <button
+      style="float: left; margin-left: 10px"
+      pButton
+      type="button"
+      class="p-button-raised p-button-help"
+      (click)="openDialog()"
+    >
+      Add new group
+    </button>
+    <app-logout class="logout"></app-logout>
+    <br>
+  </header>
+</div>
+<br />
+<br />
+
+<div class="mainer">
+  <div class="main">
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+      <!-- NAME  -->
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="tinaEvent.name"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter event name"
+          #name="ngModel"
+          style="
+            color: #fff;
+            background-color: rgb(52, 59, 75);
+            border-color: rgb(52, 59, 75);
+          "
+        />
+      </div>
+
+      <!-- DESCRIPTION  -->
+      <div class="form-group">
+        <textarea
+          placeholder="Add description"
+          type="text"
+          name="description"
+          [(ngModel)]="tinaEvent.description"
+          #description="ngModel"
+          (click)="isEmojiPiskerVisible = !isEmojiPiskerVisible"
+          class="form-control"
+          style="
+            color: #fff;
+            background-color: rgb(52, 59, 75);
+            border-color: rgb(52, 59, 75);
+          "
+        >
+        </textarea>
+      </div>
+
+      <!-- START TIME, START DATE & REPETITION -->
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- START TIME  -->
+      <div class="START">
+        <label>
+          <i class="pi pi-clock" style="color: rgb(151, 199, 151)"></i> Start
+          time</label
+        >
+        <div>
+          <span class="p-input-icon-left"> </span>
+          <p-inputMask
+            [(ngModel)]="tinaEvent.startTime"
+            placeholder="10:00"
+            name="startTime"
+            mask="99:99"
+          ></p-inputMask>
+        </div>
+      </div>
+      <!-- END TIME  -->
+      <div class="END">
+        <label>
+          <i class="pi pi-clock" style="color: rgb(255, 183, 237)"></i> End
+          time</label
+        >
+        <div>
+          <span class="p-input-icon-left">
+            <p-inputMask
+              [(ngModel)]="tinaEvent.endTime"
+              placeholder="12:00"
+              name="endTime"
+              mask="99:99"
+            ></p-inputMask>
+          </span>
+        </div>
+      </div>
+
+      <!-- GROUP -->
+      <div class="GROUP">
+        <label style="visibility: hidden">group</label>
+        <div (click)="OnGroupChange()">
+          <p-dropdown
+            [options]="groups"
+            [(ngModel)]="tinaEvent.group"
+            onchange=""
+            name="eventGroup"
+            placeholder="Group"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+
+      <!-- TIME -->
+      <!-- DATE -->
+      <!-- START DATE  -->
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="START-DATE">
+        <label for="startDate">Start date</label>
+        <div (click)="OnStartDateChange()">
+          <p-calendar
+            name="startDate"
+            [(ngModel)]="tinaEvent.startDate"
+            [defaultDate]="tinaEvent.startDate"
+            [required]="true"
+          >
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- END DATE  -->
+      <div class="END-DATE">
+        <label for="end date">End date</label>
+        <div (click)="OnEndDateChange()">
+          <p-calendar
+            name="endDate"
+            [(ngModel)]="tinaEvent.endDate"
+            [defaultDate]="tinaEvent.endDate"
+          ></p-calendar>
+        </div>
+      </div>
+
+      <!-- REPETITION -->
+      <br />
+      <div class="REPETITION" (click)="onClick()">
+        <p-treeSelect
+          [(ngModel)]="selectedRepetition"
+          [options]="treeNode"
+          display="chip"
+          [metaKeySelection]="false"
+          selectionMode="checkbox"
+          placeholder="Repeat"
+          name="repetitionFormValueName"
+        ></p-treeSelect>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <button pButton type="submit" class="p-button-raised p-button-success">
+        Submit
+      </button>
+    </form>
+  </div>
+  <div class="right-diecription">
+    <div class="right-diecription-inner">
+      <br />
+      <!-- <p class="p-tag">Group: {{previouslySelectedGroup}}</p>
+      <p class="p-tag">Event repeats: {{tinaEvent.selectedRepetition[0]}}</p> -->
+      <p class="ptag" [style.background]="setTagBackground()" [style.color]="setFontColor()">Group: {{ previouslySelectedGroup }}</p>
+      <p class="ptag">Event repeats: </p>  
+      <p *ngFor="let rep of showSelectedRep" class="subptag">{{ rep }}</p>
+      <!-- <p *ngIf="tinaEvent.repetition !== repetition.Weekly;else weekdaysTemplate" class="ptag">Event repeats: {{ tinaEvent.repetition }}</p> -->
+      <p *ngIf="tinaEvent.toDate; else toDateTemplate" class="ptag">
+        From {{ showFromDate }} to {{ showToDate }}
+      </p>
+      <p></p>
+      <p></p>
+    </div>
+    <!-- <ng-template #weekdaysTemplate><p class="ptag">Event repeats on:</p>
+      <p class="subptag" *ngFor="let day of weekdaysString">{{day}}</p>
+    </ng-template> -->
+    <ng-template #toDateTemplate><p class="ptag">From: {{showFromDate}}</p></ng-template>
+  </div>
+</div>
+<emoji-mart
+  class="emoji-mart"
+  [style]="{ position: 'absolute', bottom: '20px', right: '20px' }"
+  *ngIf="isEmojiPiskerVisible"
+  (emojiSelect)="addEmoji($event)"
+></emoji-mart>

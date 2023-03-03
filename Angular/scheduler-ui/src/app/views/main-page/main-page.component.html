@@ -1,0 +1,143 @@
+<div
+  class="background"
+  style="
+    background-image: url('https://blog.trello.com/hubfs/download%20%2895%29.png');
+  "
+>
+  <div class="blur">
+    <div [style.visibility]="'hidden'">
+      <div *ngIf="token1 !== 'null'; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock
+        ><app-navbar [receivedValue]="token1"></app-navbar
+      ></ng-template>
+      <ng-template #elseBlock
+        ><app-navbar [receivedValue]="token2"></app-navbar
+      ></ng-template>
+    </div>
+    <app-logout class="logout"></app-logout>
+    <!-- <div><br /><br /><br /></div> -->
+    <div class="main-margin-div">
+      <h1 class="h1">The purpose of an ORGANIZATION is to enable common men to do uncommon things.</h1>
+      <!-- <h3 class="h3">--TINA DRAGIČEVIĆ</h3> -->
+      <h3 class="h3">Wellcome, @{{userDto.displayName.toLocaleUpperCase()}}</h3>
+      <div class="inner-margin-div">
+        <div class="heading">
+          <div
+            class="C"
+            [routerLink]="['/diaries']"
+            [queryParams]="{ token: redirectToken }"
+          >
+            <hr class="chr" />
+            <p class="dear-diary">Dear Diary, ...</p>
+            <hr class="chrinside" />
+            <hr class="chrmin" />
+            <hr class="chrmin" />
+            <hr class="chrmin" />
+          </div>
+        </div>
+        <div class="heading">
+          <div
+            class="D"
+            style="min-width: 220px"
+            [routerLink]="['/calendar']"
+            [queryParams]="{ token: redirectToken }"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th class="head-h">Sun</th>
+                  <th class="head-h">Mon</th>
+                  <th class="head-h">Tue</th>
+                  <th class="head-h">Wed</th>
+                  <th class="head-h">Thu</th>
+                  <th class="head-h">Fri</th>
+                  <th class="head-h">Sat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="body-row"></td>
+                  <td class="body-row"></td>
+                  <td class="body-row"></td>
+                  <td class="body-row">1</td>
+                  <td class="body-row">2</td>
+                  <td class="body-row">3</td>
+                  <td class="body-row">4</td>
+                </tr>
+                <tr>
+                  <td class="body-row">5</td>
+                  <td class="body-row">6</td>
+                  <td class="body-row">7</td>
+                  <td class="body-row">8</td>
+                  <td class="body-row">9</td>
+                  <td class="body-row">10</td>
+                  <td class="body-row">11</td>
+                </tr>
+                <tr>
+                  <td class="body-row">12</td>
+                  <td class="body-row">13</td>
+                  <td class="body-row">14</td>
+                  <td class="body-row">15</td>
+                  <td class="body-row">16</td>
+                  <td class="body-row">17</td>
+                  <td class="body-row">18</td>
+                </tr>
+                <tr>
+                  <td class="body-row">19</td>
+                  <td class="body-row">20</td>
+                  <td class="body-row">21</td>
+                  <td class="body-row">22</td>
+                  <td class="body-row">23</td>
+                  <td class="body-row">24</td>
+                  <td class="body-row">25</td>
+                </tr>
+                <tr>
+                  <td class="body-row">26</td>
+                  <td class="body-row">27</td>
+                  <td class="body-row">28</td>
+                  <td class="body-row">29</td>
+                  <td class="body-row">30</td>
+                  <td class="body-row">31</td>
+                  <td class="body-row"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="heading">
+          <div
+            class="E"
+            [routerLink]="['/todo']"
+            [queryParams]="{ token: redirectToken }"
+          >
+            <div class="list">
+              <div style="margin-top: 5px">
+                <div class="list-dot"></div>
+                <hr class="ehrmin" />
+              </div>
+              <div>
+                <!-- <div class="list-dot"></div> -->
+                <i style="float: left; margin-left: 1.5px; color: rgb(255, 0, 0); font: bolder" class="pi pi-check-circle"></i>
+                <hr class="ehrmin" />
+                <!-- <i style="float: left; margin-left: 5px;" class="pi pi-check"></i> -->
+              </div>
+              <div>
+                <div class="list-dot"></div>
+                <hr class="ehrmin" />
+              </div>
+              <div>
+                <!-- <div class="list-dot"></div> -->
+                <i style="float: left; margin-left: 1.5px; color: rgb(255, 0, 0);" class="pi pi-check-circle"></i>
+                <hr class="ehrmin" />
+              </div>
+              <div>
+                <div class="list-dot"></div>
+                <hr class="ehrmin" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

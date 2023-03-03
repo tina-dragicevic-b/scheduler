@@ -1,0 +1,210 @@
+<!-- <app-navbar></app-navbar> -->
+
+<div *ngIf="token1 !== 'null'; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock
+  ><app-navbar [receivedValue]="token1"></app-navbar
+></ng-template>
+<ng-template #elseBlock
+  ><app-navbar [receivedValue]="token2"></app-navbar
+></ng-template>
+<div style="height: 5px"></div>
+<div>
+  <header class="pageHeader">
+    <br />
+    <!-- <p [style.visibility]="'hidden'"></p> -->
+    <button
+      style="float: left; margin-left: 1%"
+      pButton
+      type="button"
+      class="p-button-raised p-button-secondary"
+      icon="pi pi-arrow-left"
+      (click)="back()"
+    ></button>
+    <button
+      style="float: left; margin-left: 10px"
+      pButton
+      type="button"
+      class="p-button-raised p-button-help"
+      (click)="openDialog()"
+    >
+      Add new group
+    </button>
+    <app-logout class="logout"></app-logout>
+  </header>
+</div>
+<br />
+<br />
+
+<!-- <div class="margin-div">
+  <div class="inner-margin-div"> -->
+<div class="mainer">
+  <div class="main">
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+      <!-- NAME  -->
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="tinaEvent.name"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter event name"
+          #name="ngModel"
+          required="true"
+          style="color: #fff; background-color: rgb(52, 59, 75); border-color:rgb(52, 59, 75)"
+        />
+      </div>
+
+      <!-- DESCRIPTION  -->
+      <div class="form-group">
+        <textarea
+          placeholder="Add description"
+          type="text"
+          name="description"
+          [(ngModel)]="tinaEvent.description"
+          #description="ngModel"
+          (click)="isEmojiPiskerVisible = !isEmojiPiskerVisible"
+          class="form-control"
+          style="color: #fff; background-color: rgb(52, 59, 75); border-color:rgb(52, 59, 75)"
+        >
+        </textarea>
+      </div>
+
+      <!-- START TIME, START DATE & REPETITION -->
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- START TIME  -->
+      <div class="START">
+        <label>
+          <i class="pi pi-clock" style="color: rgb(151, 199, 151)"></i> Start time</label>
+        <div>
+          <span class="p-input-icon-left">
+          </span>
+          <p-inputMask
+            [(ngModel)]="tinaEvent.startTime"
+            placeholder="10:00"
+            name="startTime"
+            mask="99:99"
+          ></p-inputMask>
+        </div>
+      </div>
+      <!-- END TIME  -->
+      <div class="END">
+        <label>
+          <i class="pi pi-clock" style="color: rgb(255, 183, 237)"></i> End
+          time</label
+        >
+        <div>
+          <span class="p-input-icon-left">
+            <!-- <span class="p-input-icon-right">-->
+
+            <!-- <i class="pi pi-spin pi-clock"></i>  ako ispred ikone stavimo pi-spin, neovisno koja je ikona, it will... spin 😇 -->
+
+            <p-inputMask
+              [(ngModel)]="tinaEvent.endTime"
+              placeholder="12:00"
+              name="startTime"
+              mask="99:99"
+            ></p-inputMask>
+          </span>
+        </div>
+      </div>
+
+      <!-- GROUP -->
+      <div class="GROUP">
+        <label style="visibility: hidden">group</label>
+        <div>
+          <p-dropdown
+            [options]="groups"
+            optionLabel="name"
+            [(ngModel)]="tinaEvent.group"
+            name="eventGroup"
+            placeholder="Group"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+
+      <!-- TIME -->
+      <!-- TIME -->
+      <!-- TIME -->
+
+      <!-- DATE -->
+      <!-- DATE -->
+      <!-- START DATE  -->
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="START-DATE">
+        <label for="startDate">Start date</label>
+        <div>
+          <p-calendar
+            name="startDate"
+            [(ngModel)]="tinaEvent.startDate"
+            [required]="true"
+          >
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- END DATE  -->
+      <div class="END-DATE">
+        <label for="end date">End date</label>
+        <div>
+          <p-calendar
+            name="endDate"
+            [(ngModel)]="tinaEvent.endDate"
+          ></p-calendar>
+        </div>
+      </div>
+      <!-- REPETITION -->
+      <br />
+      <div class="REPETITION" (click)="onClick()">
+        <p-treeSelect
+          [(ngModel)]="selectedRepetition"
+          [options]="treeNode"
+          display="chip"
+          [metaKeySelection]="false"
+          selectionMode="checkbox"
+          placeholder="Repeat"
+          name="repetitionFormValueName"
+        ></p-treeSelect>
+      </div>
+
+      <!-- DATE -->
+      <!-- DATE -->
+      <!-- DATE -->
+      <!-- DATE -->
+      <!-- DATE -->
+
+      <br />
+      <br />
+      <br />
+
+      <div *ngIf="errorMessage" class="alert-danger">
+      <div required >{{errorMessage}}</div>
+      </div>
+      <br />
+      <br />
+      <button
+        pButton
+        type="submit"
+        class="p-button-raised p-button-success"
+        [disabled]="!eventForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+<p-confirmPopup></p-confirmPopup>
+
+<emoji-mart
+  class="emoji-mart"
+  [style]="{ position: 'absolute', bottom: '20px', right: '20px' }"
+  *ngIf="isEmojiPiskerVisible"
+  (emojiSelect)="addEmoji($event)"
+></emoji-mart>
