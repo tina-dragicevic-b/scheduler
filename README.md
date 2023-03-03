@@ -5,7 +5,7 @@ The application is created using **Spring Boot** Java framework for backend and 
 ---
 
 Main features of app are: 
-* Calendar
+* [Calendar](#calendar)
 * Personal Diary
 * To-Do List
 
